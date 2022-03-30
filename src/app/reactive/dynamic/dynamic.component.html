@@ -1,0 +1,67 @@
+<h2>Template: <small>Dinámicos</small></h2>
+<hr>
+<form autocomplete="off" [formGroup]="myForm" (ngSubmit)="save()">
+    <!--NAME-->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input 
+            type="text" 
+            class="form-control"
+            placeholder="Nombre de la persona"
+            formControlName="name"
+            >
+            <span 
+                *ngIf="validField('name')"
+                class="form-text text-danger">Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <!--ADD FAVORITE-->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+              <input 
+                class="form-control"
+                placeholder="Agregar Favorito"
+                [formControl]="newFavorite"
+                (keyup.enter)="addFavorite()"
+              >  
+              <button class="btn btn-outline-warning" type="button" (click)="addFavorite()">Agregar</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!--LIST OF FAVORITE GAMES-->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9" formArrayName="favorites">
+            <div class="input-group mb-1" *ngFor="let favorite of favoritesArr.controls; let i = index">
+              <input class="form-control" [formControlName]="i"> 
+              <button class="btn btn-outline-danger" type="button" (click)="delete(i)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-warning float-end" (click)="save()">Guardar</button>
+        </div>
+    </div>
+
+</form>
+
+<span>Valid</span>
+<pre> {{myForm.valid}} </pre>
+<br>
+
+<span>Value</span>
+<pre> {{myForm.value | json}} </pre>
+<br>
+
+<span>Agregar Juego</span>
+<pre> {{ newFavorite.valid }} </pre>
+<pre> {{ newFavorite.value }} </pre>

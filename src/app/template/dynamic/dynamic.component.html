@@ -1,0 +1,62 @@
+<h2>Template: <small>Dinámicos</small></h2>
+<hr>
+<form (ngSubmit)="save()" #myForm="ngForm" autocomplete="off">
+
+    <!--NAME-->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input 
+            type="text" 
+            class="form-control"
+            placeholder="Nombre de la persona"
+            [ngModel]="person.name"
+            name="name"
+            required
+            >
+            <span 
+                *ngIf="validName()"
+                class="form-text text-danger">Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <!--ADD FAVORITE-->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+              <input 
+                class="form-control"
+                placeholder="Agregar Favorito"
+                [(ngModel)]="newGame"
+                name="newGame"
+                (keyup.enter)="addGame()"
+              >  
+              <button class="btn btn-outline-warning" type="button" (click)="addGame()">Agregar</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!--LIST OF FAVORITE GAMES-->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+            <div class="input-group mb-1" *ngFor="let favorite of person.favorites; let i = index">
+              <input name="favorite_{{i}}" [(ngModel)]="favorite.name" class="form-control mb-1" required> 
+              <button class="btn btn-outline-danger" type="button" (click)="delete(i)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-warning float-end" (click)="save()" [disabled]="myForm.invalid">Guardar</button>
+        </div>
+    </div>
+
+</form>
+
+<span>Persona</span>
+<pre> {{person | json}} </pre>

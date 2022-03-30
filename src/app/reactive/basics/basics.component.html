@@ -1,0 +1,82 @@
+<h2>Template: <small>Básicos</small></h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <form (ngSubmit)="save()" autocomplete="off" [formGroup]="myForm">
+            <!--PRODUCT-->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="sol-sm-9">
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Nombre del Producto" 
+                    formControlName="name"
+                    >
+                    <span 
+                    *ngIf="validField('name')"
+                    class="form-text text-danger"
+                    >Debe ser de 3 letras.</span>
+                </div>
+            </div>
+
+            <!--PRICE-->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="sol-sm-9">
+                    <input 
+                    type="number" 
+                    class="form-control" 
+                    placeholder="Precio del Producto" 
+                    formControlName="price"
+                    >
+                    <span 
+                    *ngIf="validField('price')"
+                    class="form-text text-danger">El Precio debe ser 0 o mayor</span>
+                </div>
+            </div>
+
+            <!--STOCKS-->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="sol-sm-9">
+                    <input 
+                    type="number" 
+                    class="form-control" 
+                    placeholder="Existencia del Producto" 
+                    formControlName="stock"
+                    >
+                    <span 
+                    *ngIf="validField('stock')"
+                    class="form-text text-danger">El Stock debe ser 0 o mayor</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button 
+                    class="btn btn-primary float-end" 
+                    type="submit"
+                    >Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <span>Valid</span>
+        <pre> {{myForm.valid}} </pre>
+
+        <span>Pristine</span>
+        <pre> {{myForm.pristine}} </pre>
+
+        <span>Touched</span>
+        <pre> {{myForm.touched}} </pre>
+
+        <span>Value</span>
+        <pre> {{myForm.value | json}} </pre>
+
+    </div>
+</div>
