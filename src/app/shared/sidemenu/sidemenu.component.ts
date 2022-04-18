@@ -45,10 +45,6 @@ export class SidemenuComponent {
     {
       text: 'Registro',
       route: './auth/register'
-    },
-    {
-      text: 'Login',
-      route: './auth/login'
     }
   ]
 }
